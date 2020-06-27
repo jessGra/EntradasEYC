@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+	<!-- BOOTSTRAP 4 -->
+	<link th:href="@{/bootstrap/bootstrap.min.css}"  rel="stylesheet" type="text/css" />
+    <!-- fontawesome -->
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet" type="text/css" />
+    <!-- custom css -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+	<title>Iniciar Sesión</title>
+</head>
+<body>
+	<div class="container mt-5">
+    <div>
+        <div class="card mt-4">
+            <div class="card-header">
+                <i class="fa fa-user"></i> Iniciar sesión
+            </div>
+            <div class="card-block p-4">
+                <form sec:authorize="!isAuthenticated()" name="f" th:action="@{/signin}" method="post">
+                    <fieldset>
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            Credenciales erróneas
+                        </div>
+                        <div th:if="${param.logout}" class="alert alert-success">
+                            Sesión cerrada
+                        </div>
+                        <div class="form-group">
+                            <label for="textUsername">Nombre</label>
+                            <input type="text" name="textUsername" id="textUsername" class="form-control" placeholder="nombre de usuario">
+                        </div>
+                        <div class="form-group">
+                            <label for="textPassword">Contraseña</label>
+                            <input type="password" name="textPassword" id="textPassword" class="form-control" placeholder="contraseña">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="checkRememberMe" name="checkRememberMe">
+                            <label for="checkRememberMe" class="form-check-label">Recordarme</label>
+                        </div>
+                        <div class="form-actions mt-4">
+                            <button type="submit" class="btn btn-success">Iniciar Sesión</button>
+                        </div>
+                    </fieldset>
+
+                </form>
+                <p sec:authorize="isAuthenticated()">Ya has iniciado sesión</p>
+                <a sec:authorize="isAuthenticated()" th:href="@{/entrada}"><button class="btn btn-primary btn-lg "><i class="far fa-hand-point-left"></i> Volver</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+	
+	<footer th:insert="fragments.html::footer"></footer>
+</body>
+</html>

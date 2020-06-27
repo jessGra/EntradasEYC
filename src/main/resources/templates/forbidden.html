@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+	<!-- Bootstrap CSS -->
+	<link th:href="@{/bootstrap/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <!-- fontawesome -->
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet" type="text/css" />
+    <!-- custom css -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+    <title>Lista entradas</title>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container mt-5 text-white">
+        <h3 align="center">ACCESO NO PERMITIDO</h3>
+        <div class="card" style="background-color: #0b1419">
+        <img th:src="@{/img/403.png}" class="card-img">
+         <div class="card-img-overlay">
+         	<a th:href="@{/entrada}"><button class="btn btn-primary btn-lg "><i class="far fa-hand-point-left"></i> Inicio</button></a>
+         </div>
+        </div>
+</div>
+<footer th:insert="fragments.html::footer"></footer>
+</body>
+</html>

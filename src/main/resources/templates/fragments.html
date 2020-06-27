@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+	<title>Gestión Entradas</title>
+</head>
+<body>
+<div th:fragment="nav">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark border-bottom border-success p-3" style="background-color: #0b1419!important; ">
+        <a class="navbar-brand text-white">GESTIÓN DE ENTRADAS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto text-center">
+            <li class="nav-item active">
+              <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success" th:href="@{/entrada/nueva}"><i class="fas fa-plus-circle"></i> Nueva Entrada</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  th:href="@{/entrada}">Lista de entradas</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="btn btn-danger" th:href="@{/entrada/por-entregar}">Entradas Pendientes</a>
+            </li>
+            
+            
+          </ul>
+          <form sec:authorize="isAuthenticated()" class="form-inline" form-method="post" th:action="@{/logout}">
+                <button  class="btn btn-outline-danger float-right" type="submit"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+          </form>
+        </div>
+      </nav>
+      <small class="form-text text-white float-right mr-3"><span sec:authentication="name"></span></small>
+</div>
+<footer th:fragment="footer" class="dark bg-dark text-center p-3" style="background-color: #0b1419!important;">
+    <div class="container">
+        <span class="text-muted">CREADO POR JESGRA&copy;</span>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</footer>
+</body>
+</html>

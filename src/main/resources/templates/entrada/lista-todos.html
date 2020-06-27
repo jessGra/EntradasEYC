@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+	<!-- Bootstrap CSS -->
+	<link th:href="@{/bootstrap/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <!-- fontawesome -->
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet" type="text/css" />
+    <!-- custom css -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+    <title>Lista entradas</title>
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container mt-5 text-white" >
+<h1 class="text-center mb-5">Historial de entradas</h1>
+    <table id="example" class="table table-hover table-dark text-center table-responsive"  >
+        <thead>
+        <tr>
+        	<th scope="col">ENTRADA</th>
+        	<th scope="col">FECHA</th>
+            <th scope="col">CLIENTE</th>
+            <th scope="col">OBJETO</th>
+            <th scope="col">MARCA</th>
+            <th scope="col">MODELO</th>
+            <th scope="col">TOTAL</th>
+            <th scope="col">ENTREGADO</th>
+            <th scope="col">DETALLE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entrada: ${entradasTodos}">
+            <td th:text="${entrada.numeroEntrada}"></td>
+        	<td th:text="${entrada.fechaEntrada}"></td>
+            <td th:text="${entrada.cliente}"></td>
+            <td th:text="${entrada.objeto}"></td>
+            <td th:text="${entrada.marca}"></td>
+            <td th:text="${entrada.modelo}"></td>
+            <td th:text="${#numbers.formatDecimal(entrada.total, 1, 'DEFAULT', 0, 'DEFAULT')}"></td>
+            <td th:if="${entrada.entregado=='si'}"><span class="input-group-text bg-success text-white" id="entregado">Entregado</span></td>
+            <td th:if="${entrada.entregado == 'no'}"><span class="input-group-text bg-danger text-white" id="entregado">No entregado</span></td>
+            <td><a th:href="@{'/entrada/detalle/' + ${entrada.id}}"><button class="btn btn-outline-primary"><i class="fa fa-eye"></i></button></a></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <th scope="col">ENTRADA</th>
+            <th scope="col">FECHA</th>
+            <th scope="col">CLIENTE</th>
+            <th scope="col">OBJETO</th>
+            <th scope="col">MARCA</th>
+            <th scope="col">MODELO</th>
+            <th scope="col">TOTAL</th>
+            <th scope="col">ENTREGADO</th>
+            <th scope="col">DETALLE</th>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<footer th:insert="fragments.html::footer"></footer>
+	<!--JS datatable-->
+        
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+     $('#example').DataTable({
+    	 "language": {
+    		 "sProcessing":     "Procesando...",
+             "lengthMenu": "Mostrar _MENU_ entradas por página",
+             "zeroRecords": "No coinciden entradas con su búsqueda",
+             "info": "Página _PAGE_ de _PAGES_",
+             "infoFiltered": "(filtrado de un total de _MAX_ entradas)",
+             "sInfoEmpty":      "0 entradas encontradas",
+             "sEmptyTable":"Ningún dato disponible en esta tabla =(",
+             "sSearch":         "Buscar:",
+             "sLoadingRecords": "Cargando...",
+             "oPaginate": {
+                 "sFirst":    "Primero",
+                 "sLast":     "Último",
+                 "sNext":     "Siguiente",
+                 "sPrevious": "Anterior"
+             },
+             "oAria": {
+                 "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+             }
+         },
+         "order": [ 1, "desc" ]
+         
+     });
+    });
+ </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+
+/* width scrollbar*/
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track scrollbar*/
+::-webkit-scrollbar-track {
+  background: #0b1419; 
+}
+ 
+/* Handle scrollbar*/
+::-webkit-scrollbar-thumb {
+  background: #28a745; 
+}
+
+/* Handle on hover scrollbar */
+::-webkit-scrollbar-thumb:hover {
+  background: #28a745; 
+}
+input, textarea, select{
+background-color: #fff !important;
+}
+a{
+text-decoration: none !important;}
+body{
+	background-color: #0b1419;
+}

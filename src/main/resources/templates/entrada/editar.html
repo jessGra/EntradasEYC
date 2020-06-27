@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+	<!-- Bootstrap CSS -->
+	<link th:href="@{/bootstrap/bootstrap.min.css}"  rel="stylesheet" type="text/css" />
+    <!-- fontawesome -->
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet" type="text/css" />
+    <!-- custom css -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+	<title>Editar Entrada</title>	
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<!-- ADMINISTRADOR  -->
+	<div sec:authorize="hasRole('ROLE_ADMIN')" class="card m-5 mx-auto " style="max-width: 80%">
+	<a onclick='javascript:window.history.back()' style="text-decoration: none"><button class="btn btn-primary btn-block btn-lg">Volver</button></a>
+		<div class="card-header d-flex justify-content-between">
+			<h4>
+				<i class="fas fa-table"></i> Entrada <b th:text="${entrada.numeroEntrada}"></b>
+			</h4>
+			 <span th:if="${entrada.entregado=='si'}" class="input-group-text bg-success text-white" id="entregado">Entregado</span>
+			<span th:if="${entrada.entregado=='no'}"class="input-group-text bg-danger text-white" id="entregado">No entregado</span>
+		</div>
+		<div class="card-body p-4">
+			<form action="/entrada/actualizar" th:object="${entrada}" method="post">
+				<!-- protección csrf -->
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <!-- fin csrf -->
+                 <input type="hidden"  th:field="*{id}"/>
+				<div class="form-row">
+					<div class="form-group col-md-2 text-center">
+						<label for="numeroEntrada"># Entrada</label> <input readonly type="number"
+							class="form-control text-center" id="numeroEntrada" th:field="*{numeroEntrada}">
+                        	<small class="form-text text-danger" th:if="${error}" th:text="${error}"></small>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="clienteName">Cliente</label> <input type="text"
+							class="form-control" id="clienteName" th:field="*{cliente}">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"></small>
+					</div>
+					<div class="form-group col-md-2">
+						<label for="cedula">Cédula o NIT</label> <input type="number"
+							class="form-control" id="cedula" th:field="*{cedula}">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"></small>
+					</div>
+					<div class="form-group col-md-2">
+						<label for="celular">TEL/CEL</label> <input type="number"
+							class="form-control" id="celular" th:field="*{celular}">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('celular')}" th:errors="*{celular}"></small>
+					</div>
+					<div class="form-group col-md-3 text-center">
+						<label for="fecha">Fecha entrada</label> 
+						<input readonly type="text" class="form-control text-center" id="fecha" th:field="*{fechaEntrada}">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group row">
+						<label for="objeto" class="col-4 col-form-label text-right">Objeto:
+						</label>
+						<div class="col-sm">
+							<input type="text" class="form-control" id="objeto" th:field="*{objeto}">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('objeto')}" th:errors="*{objeto}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="marca" class="col-4 col-form-label text-right">Marca:
+						</label>
+						<div class="col-sm">
+							<input type="text" class="form-control" id="marca" th:field="*{marca}">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="modelo" class="col-4 col-form-label text-right">Modelo:
+						</label>
+						<div class="col-sm">
+							<input type="text" class="form-control" id="modelo" th:field="*{modelo}">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></small>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-group">
+						<label for="observacion">Observación</label>
+						<textarea class="form-control" id="Observación" rows="3" th:field="*{observacion}"></textarea>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('observacion')}" th:errors="*{observacion}"></small>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-auto">
+						<label class="mr-sm-2" for="estado">Estado</label> <select
+							class="custom-select mr-sm-2" id="estado" th:field="*{estado}">
+							<option value="por definir">Por definir</option>
+							<option value="en revision">En revisión</option>
+							<option value="no tiene arreglo">No tiene arrego</option>
+							<option value="esperando respuesta">Esperando respuesta</option>
+							<option value="listo">Listo</option>
+						</select>
+					</div>
+					<div class="form-group col-auto">
+						<label for="tecnico">Encargado</label> <select
+							class="custom-select mr-sm-2" id="tecnico" th:field="*{tecnico}">
+							<option value="por definir">Por definir</option>
+							<option value="edgar">Edgar Esquivel</option>
+							<option value="karen">Karen Esquivel</option>
+							<option value="karol">Karol Esquivel</option>
+							<option value="jesus">Jesús Granada</option>
+						</select>
+					</div>
+					<div class="form-group col-md-2 text-center">
+						<label for="abono">Abono</label> <input type="number"
+							class="form-control text-center" id="abono" th:field="*{abono}">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('abono')}" th:errors="*{abono}"></small>
+					</div>
+					<div class="form-group col-md-2 text-center">
+						<label for="total">Total</label> <input type="number"
+							class="form-control text-center" id="total"  th:field="*{total}">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('total')}" th:errors="*{total}"></small>
+					</div>
+					<div class="form-group col-md-2 text-center">
+						<label for="entregado">Entregado</label> 
+						<select class="custom-select mr-sm-2" id="entregado" th:field="*{entregado}">
+							<option value="no">No</option>
+							<option value="si">Si</option>
+						</select>
+					</div>
+
+				</div>
+				<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-primary btn-lg btn-block" data-toggle="modal" data-target="#secureModal">Guardar Cambios</button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="secureModal" tabindex="-1" role="dialog" aria-labelledby="secureModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="secureModalLabel">¡Ten cuidado!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        	los cambios que va a realizar no se pueden deshacer y serán permanentes.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+			</form>
+		</div>
+
+	</div>
+
+	<footer th:insert="fragments.html::footer"></footer>
+</body>
+</html>
