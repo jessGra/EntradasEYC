@@ -86,7 +86,7 @@ public class EntradaController {
     public ModelAndView editar(@PathVariable("id") long id){
         if(!entradaService.existePorIdEntrada(id))
             return new ModelAndView("redirect:/entrada");
-        ModelAndView mv = new ModelAndView("/entrada/editar");
+        ModelAndView mv = new ModelAndView("entrada/editar");
         Entrada entrada = entradaService.optenerEntradaPorId(id).get();
         
         mv.addObject("entrada", entrada);
