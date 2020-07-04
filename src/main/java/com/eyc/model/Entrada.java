@@ -29,8 +29,6 @@ public class Entrada {
 	@Column
 	private String cliente;
 	
-	@NotBlank(message = "Debe especificar número de identificación del cliente")
-	@Size(min = 7, max = 10, message = "entre 7 y 10 dígitos")
 	@Column
 	private String cedula;
 	
@@ -52,6 +50,7 @@ public class Entrada {
 	private String modelo;
 	
 	@NotBlank(message = "Debe indicar una observación de la entrada")
+	@Size(min = 0, max = 5000 ,message = "Mucho texto.")
 	@Column
 	private String observacion;
 	
@@ -79,7 +78,7 @@ public class Entrada {
 	}
 
 	public Entrada(@NotBlank String numeroEntrada, @NotBlank String fechaEntrada, @NotBlank String cliente,
-			@NotBlank String cedula, @NotBlank String celular, @NotBlank String objeto, @NotBlank String marca,
+			String cedula, @NotBlank String celular, @NotBlank String objeto, @NotBlank String marca,
 			@NotBlank String modelo, @NotBlank String observacion, @NotBlank String estado, @NotBlank String tecnico,
 			@NotNull @Min(0) double abono, @NotNull @Min(0) double total, @NotBlank String entregado) {
 		this.numeroEntrada = numeroEntrada;

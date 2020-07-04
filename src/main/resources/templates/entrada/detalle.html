@@ -76,7 +76,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div class="form-group">
 					<div class="form-group">
 						<label for="observacion">Observación</label>
-						<textarea readonly class="form-control" id="Observación" rows="3" th:field="*{observacion}"></textarea>
+						<textarea readonly class="form-control" id="Observación" rows="5" th:field="*{observacion}"></textarea>
 					</div>
 				</div>
 				<div class="form-row">
@@ -85,7 +85,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<select disabled class="custom-select mr-sm-2" id="estado" th:field="*{estado}">
 							<option value="por definir">Por definir</option>
 							<option value="en revision">En revisión</option>
-							<option value="no tiene arreglo">No tiene arrego</option>
+							<option value="no tiene arreglo">No tiene arreglo</option>
 							<option value="esperando respuesta">Esperando respuesta</option>
 							<option value="listo">Listo</option>
 						</select>

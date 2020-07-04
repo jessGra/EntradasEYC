@@ -78,7 +78,7 @@
 				<div class="form-group">
 					<div class="form-group">
 						<label for="observacion">Observación</label>
-						<textarea class="form-control" id="Observación" rows="3" th:field="*{observacion}"></textarea>
+						<textarea class="form-control" id="Observación" rows="5" th:field="*{observacion}"></textarea>
 						<small class="form-text text-danger" th:if="${#fields.hasErrors('observacion')}" th:errors="*{observacion}"></small>
 					</div>
 				</div>
@@ -88,14 +88,14 @@
 							class="custom-select mr-sm-2" id="estado" th:field="*{estado}">
 							<option value="por definir" selected>Por definir</option>
 							<option value="en revision">En revisión</option>
-							<option value="no tiene arreglo">No tiene arrego</option>
+							<option value="no tiene arreglo">No tiene arreglo</option>
 							<option value="esperando respuesta">Esperando respuesta</option>
 							<option value="listo">Listo</option>
 						</select>
 						<!--   <select class="custom-select mr-sm-2" >
 							<option value="0" th:selected="${entrada.estado=='0'}">Por definir</option>
 							<option value="1" th:selected="${entrada.estado=='1'}">En revisión</option>
-							<option value="2" th:selected="${entrada.estado=='2'}">No tiene arrego</option>
+							<option value="2" th:selected="${entrada.estado=='2'}">No tiene arreglo</option>
 							<option value="3" th:selected="${entrada.estado=='3'}">Esperando respuesta</option>
 							<option value="4" th:selected="${entrada.estado=='4'}">Listo</option>
 						</select>-->
